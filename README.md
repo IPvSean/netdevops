@@ -4,7 +4,19 @@
 
 This repo contains example [OSPF Unnumbered](http://docs.cumulusnetworks.com/display/CL25/Open+Shortest+Path+First+-+OSPF+-+Protocol) topologies automated using Ansible.
 
-xxx
+### Functionality
+
+* Templates the /etc/network/interfaces file
+* Disables the kernel ARP filter on all interfaces
+* Configures the Prescriptive Topology Manager (PTM)
+* Configures the switch ports.conf file for 40G switches
+* Installs a Cumulus Linux license
+* Templates the /etc/quagga/Quagga.conf file for OSPF Unummbered neighbours and starts Quagga
+
+Additionally, the following basic system configuration is performed
+
+* Creates a "cumulus" user, and configures sudo & SSH for the new user
+* Configures the NTP client and a Message Of The Day (motd)
 
 ## Usage
 

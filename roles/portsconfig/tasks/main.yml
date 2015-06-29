@@ -1,5 +1,7 @@
 - name: configure T2 leaf ports
-  template: src=ports_conf_2lt22s.j2 dest=/etc/cumulus/ports.conf
+  cl_ports:
+    "speed_10g": ["swp2-31"]
+    "speed_4_by_10g": ["swp1", "swp32"]
   notify:
     - restart switchd
     - reload networking

@@ -12,12 +12,13 @@
   when: loopback_ip is defined
 
 - name: configure managment interface
-  cl_interface: 'eth0'
+  cl_interface:
+    name: 'eth0'
     addr_method: 'dhcp'
 
 - name: configure unnumbered interfaces
   cl_interface:
-    name: '{{ item }}'
+    name: {{ item }}
     ipv4: '{{ loopback_ip}}/32'
     with_items: unnumbered
     when: unnumbered is defined

@@ -24,10 +24,10 @@
   when: unnumbered is defined
 
 - name: configure bridges
-  cl_interface:
-    name: "{{ item.bridgename }}"
+  cl_bridge:
+    name: "{{ item.name }}"
     ipv4: "{{ item.ip_and_mask }}"
-    bridge_ports: "{{ item.members|join(' ') }}"
-    mstpctl_stp: true
+    ports: "{{ item.members }}"
+    stp: true
   with_items: bridges
   when: bridges is defined

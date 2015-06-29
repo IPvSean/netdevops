@@ -1,4 +1,4 @@
--name: configure loopback interface
+- name: configure loopback interface
   cl_interface:
     lo:
       addr_family: 'loopback'

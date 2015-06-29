@@ -1,6 +1,6 @@
 - set_fact:
     loopback_ip: "{{ interfaces[ansible_hostname].loopback }}"
-    unnmumbered: "{{ interfaces[ansible_hostname].int_unnumbered }}"
+    unnumbered: "{{ interfaces[ansible_hostname].int_unnumbered }}"
     bridges: "{{ interfaces[ansible_hostname].bridges }}"
 
 - name: configure loopback interface
@@ -20,5 +20,14 @@
   cl_interface:
     name: '{{ item }}'
     ipv4: '{{ loopback_ip}}/32'
-    with_items: unnumbered
-    when: unnumbered is defined
+  with_items: unnumbered
+  when: unnumbered is defined
+
+- name: configure bridges
+  cl_interface:
+    name: "{{ item.bridgename }}"
+    ipv4: "{{ item.ip_and_mask }}"
+    bridge_ports: "{{ item.members|join(' ') }}"
+    mstpctl_stp: true
+  with_items: bridges
+  when: bridges is defined

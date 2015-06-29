@@ -13,7 +13,7 @@
 
 - name: configure managment interface
   cl_interface: 'eth0'
-  addr_method: 'dhcp'
+    addr_method: 'dhcp'
 
 - name: configure unnumbered interfaces
   cl_interface:

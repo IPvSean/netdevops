@@ -1,5 +1,6 @@
 - set_fact:
     loopback_ip: "{{ interfaces[ansible_hostname].loopback }}"
+    unnmumbered: "{{ interfaces[ansible_hostname].int_unnumbered }}"
     bridges: "{{ interfaces[ansible_hostname].bridges }}"
 
 - name: configure loopback interface
@@ -9,3 +10,14 @@
     ipv4: '{{ loopback_ip }}/32'
   notify: reload networking
   when: loopback_ip is defined
+
+- name: configure managment interface
+  cl_interface: 'eth0'
+  addr_method: 'dhcp'
+
+- name: configure unnumbered interfaces
+  cl_interface:
+    name: '{{ item }}'
+    ipv4: '{{ loopback_ip}}/32'
+    with_items: unnumbered
+    when: unnumbered is defined

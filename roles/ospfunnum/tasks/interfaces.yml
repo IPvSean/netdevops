@@ -1,0 +1,7 @@
+-name: configure loopback interface
+  cl_interface:
+    lo:
+      addr_family: 'loopback'
+      ipv4: '{{ loopback_ip }}/32'
+  notify: reload networking
+  when: loopback_ip is defined

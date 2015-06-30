@@ -1,7 +1,10 @@
 - set_fact:
     loopback_ip: "{{ interfaces[ansible_hostname].loopback }}"
     unnumbered: "{{ interfaces[ansible_hostname].int_unnumbered }}"
+
+- set_fact:
     bridges: "{{ interfaces[ansible_hostname].bridges }}"
+  when: interfaces[ansible_hostname].bridges is defined
 
 - name: configure loopback interface
   cl_interface:

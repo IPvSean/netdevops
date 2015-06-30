@@ -15,11 +15,13 @@
   cl_interface:
     name: 'eth0'
     addr_method: 'dhcp'
+  notify: reload networking
 
 - name: configure unnumbered interfaces
   cl_interface:
     name: '{{ item }}'
     ipv4: '{{ loopback_ip}}/32'
+  notify: reload networking
   with_items: unnumbered
   when: unnumbered is defined
 
@@ -29,5 +31,6 @@
     ipv4: "{{ item.ip_and_mask }}"
     ports: "{{ item.members }}"
     stp: true
+  notify: reload networking
   with_items: bridges
   when: bridges is defined

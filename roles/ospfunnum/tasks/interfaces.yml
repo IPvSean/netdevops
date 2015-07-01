@@ -1,0 +1,39 @@
+- set_fact:
+    loopback_ip: "{{ interfaces[ansible_hostname].loopback }}"
+    unnumbered: "{{ interfaces[ansible_hostname].int_unnumbered }}"
+
+- set_fact:
+    bridges: "{{ interfaces[ansible_hostname].bridges }}"
+  when: interfaces[ansible_hostname].bridges is defined
+
+- name: configure loopback interface
+  cl_interface:
+    name: 'lo'
+    addr_method: 'loopback'
+    ipv4: '{{ loopback_ip }}/32'
+  notify: reload networking
+  when: loopback_ip is defined
+
+- name: configure managment interface
+  cl_interface:
+    name: 'eth0'
+    addr_method: 'dhcp'
+  notify: reload networking
+
+- name: configure unnumbered interfaces
+  cl_interface:
+    name: '{{ item }}'
+    ipv4: '{{ loopback_ip}}/32'
+  notify: reload networking
+  with_items: unnumbered
+  when: unnumbered is defined
+
+- name: configure bridges
+  cl_bridge:
+    name: "{{ item.name }}"
+    ipv4: "{{ item.ip_and_mask }}"
+    ports: "{{ item.members }}"
+    stp: true
+  notify: reload networking
+  with_items: bridges
+  when: bridges is defined

@@ -1,5 +1,7 @@
+- include: interfaces.yml
+
 - name: configure /etc/network/interfaces
-  template: src=../../common/templates/interfaces.j2 dest=/etc/network/interfaces
+  template: src=interfaces.j2 dest=/etc/network/interfaces
   notify: reload networking
 
 - name: configure quagga daemons file

@@ -1,0 +1,44 @@
+interfaces:
+  edge1:
+    loopback: "1.1.1.1"
+    int_unnumbered: ["swp1", "swp2", "swp3", "swp4"]
+  edge2:
+    loopback: "2.2.2.2"
+    int_unnumbered: ["swp1", "swp2", "swp3", "swp4"]
+  spine1:
+    loopback: "3.3.3.3"
+    int_unnumbered: ["swp1", "swp2", "swp3", "swp4", "swp5", "swp6"]
+  spine2:
+    loopback: "4.4.4.4"
+    int_unnumbered: ["swp1", "swp2", "swp3", "swp4", "swp5", "swp6"]
+  spine3:
+    loopback: "5.5.5.5"
+    int_unnumbered: ["swp1", "swp2", "swp3", "swp4", "swp5", "swp6"]
+  spine4:
+    loopback: "6.6.6.6"
+    int_unnumbered: ["swp1", "swp2", "swp3", "swp4", "swp5", "swp6"]
+  leaf1:
+    loopback: "7.7.7.7"
+    int_unnumbered: ["swp1", "swp2", "swp3", "swp4"]
+    bridges:
+      - name: "br0"
+        ip_and_mask: "10.4.1.1/25"
+        members: ["swp32s0"]
+      - name: "br1"
+        ip_and_mask: "10.4.1.129/25"
+        members: ["swp32s1"]
+  leaf2:
+    loopback: "10.2.1.2"
+    int_unnumbered: ["swp1s0","swp1s1","swp1s2","swp1s3"]
+    bridges:
+      - name: "br0"
+        ip_and_mask: "10.4.2.1/25"
+        members: ["swp32s0"]
+      - name: "br1"
+        ip_and_mask: "10.4.2.129/25"
+        members: ["swp32s1"]
+
+hostnetranges:
+  - 10.4.0.0/16
+
+

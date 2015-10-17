@@ -1,8 +1,0 @@
-- name: configure T2 leaf ports
-  cl_ports:
-    "speed_40g": ["swp2-31"]
-    "speed_4_by_10g": ["swp1", "swp32"]
-  notify:
-    - restart switchd
-    - reload networking
-    - restart quagga

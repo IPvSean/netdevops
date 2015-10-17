@@ -28,12 +28,10 @@
   with_items: unnumbered
   when: unnumbered is defined
 
-- name: configure bridges
-  cl_bridge:
-    name: "{{ item.name }}"
-    ipv4: "{{ item.ip_and_mask }}"
-    ports: "{{ item.members }}"
-    stp: true
+- name: configure host networks
+  cl_interface:
+    name: '{{ item }}'
+    ipv4: '{{ hostnetwork}}'
   notify: reload networking
-  with_items: bridges
-  when: bridges is defined
+  with_items: hostnetworkinterfaces
+  when: hostnetworkinterfaces is defined

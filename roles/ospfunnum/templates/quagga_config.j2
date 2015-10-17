@@ -7,6 +7,7 @@
 {% for item in int_unnumbered -%}
 interface {{item }}
   ip ospf network point-to-point
+  ip ospf area 0
 !
 {% endfor -%}
 !
@@ -14,14 +15,11 @@ router-id {{ loopback_ip }}
 router ospf
   auto-cost reference-bandwidth  40000
   ospf router-id {{ loopback_ip }}
-  passive-interface default
-{% for item in int_unnumbered %}
-  no passive-interface {{ item }}
-{% endfor %}
-  network {{ loopback_ip }}/32 area 0.0.0.0
-{% if hostnetranges is defined and is_leaf is defined -%}
-  {% for item in hostnetranges %}
-  network {{ item }} area 0.0.0.0
+{% if hostnetworkinterfaces is defined -%}
+  {% for item in hostnetworkinterfaces  %}
+interface {{item }}
+  ip ospf network point-to-point
+  ip ospf area 0
   {% endfor %}
 {% endif -%}
 !

@@ -1,0 +1,9 @@
+- hosts: leaf
+  user: root
+  roles:
+    - common
+    - ospfunnum
+  vars_files:
+    - roles/ospfunnum/vars/main.yml
+  handlers:
+    - include : handlers/main.yml

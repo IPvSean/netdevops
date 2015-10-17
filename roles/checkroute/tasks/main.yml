@@ -1,0 +1,23 @@
+- name: Test if 9.9.9.9 route is present, with a nexthop of 4.4.4.4 
+  cl_prefix_check: prefix=9.9.9.9 nonexthop=4.4.4.4
+  when: ansible_hostname != "leaf3"
+
+- name: Test if 10.10.10.10 route is present, with a nexthop of 4.4.4.4 
+  cl_prefix_check: prefix=10.10.10.10 nonexthop=4.4.4.4
+  when: ansible_hostname != "leaf4"
+
+- name: Test if 12.12.12.12 route is present, with a nexthop of 4.4.4.4
+  cl_prefix_check: prefix=12.12.12.12/31 nonexthop=4.4.4.4
+
+- local_action: mail
+                host='127.0.0.1'
+                subject="Ansible-Report at {{ansible_date_time.time}} on
+                {{ansible_date_time.date}}"
+                body="Spine4 with IP address 4.4.4.4/32 is no longer being used by
+                routing at {{ansible_date_time.time}} on {{ansible_date_time.date}},
+                please hot swap this switch ASAP ----- Thank You, The Cumulus
+                Network Automation Wbench"
+                from="wbench.local"
+                to="sean@cumulusnetworks.com"
+                charset=utf8
+  run_once: yes

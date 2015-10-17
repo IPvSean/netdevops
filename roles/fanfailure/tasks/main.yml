@@ -1,0 +1,17 @@
+- set_fact:
+    loopback_ip: "{{ interfaces[ansible_hostname].loopback }}"
+    unnumbered: "{{ interfaces[ansible_hostname].int_unnumbered }}"
+
+- set_fact:
+    hostnetworkinterfaces: "{{interfaces[ansible_hostname].hostnetworkinterfaces}}"
+    hostnetwork: "{{interfaces[ansible_hostname].hostnetwork}}"
+  when: interfaces[ansible_hostname].hostnetworkinterfaces is defined
+
+- name: enable OSPFv2 on swp1 and set it be a point2point OSPF interface with a cost of 65535
+  cl_quagga_ospf:
+    interface: '{{ item }}' 
+    point2point: 'yes'
+    cost: '65535'
+    saveconfig: 'yes'
+  with_items: unnumbered
+  when: unnumbered is defined

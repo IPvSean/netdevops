@@ -1,0 +1,8 @@
+- hosts: spine2 
+  user: root
+  roles:
+    - fanfailure 
+  vars_files:
+    - roles/ospfunnum/vars/main.yml
+  handlers:
+    - include : handlers/main.yml

@@ -1,1 +1,13 @@
-/home/cumulus/example-ospfunnum-ansible/hosts-
+[spine]
+spine1
+spine2
+spine3
+spine4
+[leaf]
+leaf1
+leaf2
+leaf3
+leaf4
+[edge]
+edge1
+edge2

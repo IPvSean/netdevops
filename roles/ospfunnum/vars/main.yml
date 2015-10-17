@@ -21,7 +21,7 @@ interfaces:
     loopback: "7.7.7.7"
     int_unnumbered: ["swp1", "swp2", "swp3", "swp4"]
     hostnetworkinterfaces: ["swp5"]
-    hostnetwork: "11.12.11.10/31"
+    hostnetwork: "11.11.11.10/31"
   leaf2:
     loopback: "8.8.8.8"
     int_unnumbered: ["swp1", "swp2", "swp3", "swp4"]
@@ -31,10 +31,10 @@ interfaces:
     loopback: "9.9.9.9"
     int_unnumbered: ["swp1", "swp2", "swp3", "swp4"]
     hostnetworkinterfaces: ["swp5"]
-    hostnetwork: "12.12.13.13/31"
+    hostnetwork: "12.12.12.13/31"
   leaf4:
     loopback: "10.10.10.10"
     int_unnumbered: ["swp1", "swp2", "swp3", "swp4"]
     hostnetworkinterfaces: ["swp5"]
-    hostnetwork: "12.12.13.13/31"
+    hostnetwork: "12.12.12.13/31"
 

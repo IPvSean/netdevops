@@ -4,6 +4,9 @@
 {% set int_unnumbered = intvars.int_unnumbered -%}
 {% set swbridges = intvars.bridges -%}
 
+interface lo
+  ip ospf area 0
+!
 {% for item in int_unnumbered -%}
 interface {{item }}
   ip ospf network point-to-point

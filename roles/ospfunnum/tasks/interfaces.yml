@@ -3,8 +3,9 @@
     unnumbered: "{{ interfaces[ansible_hostname].int_unnumbered }}"
 
 - set_fact:
-    bridges: "{{ interfaces[ansible_hostname].bridges }}"
-  when: interfaces[ansible_hostname].bridges is defined
+    hostnetworkinterfaces: "{{interfaces[ansible_hostname].hostnetworkinterfaces}}"
+    hostnetwork: "{{interfaces[ansible_hostname].hostnetwork}}"
+  when: interfaces[ansible_hostname].hostnetworkinterfaces is defined
 
 - name: configure loopback interface
   cl_interface:
